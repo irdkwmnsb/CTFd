@@ -6,7 +6,7 @@ import { cumulativeSum, colorHash } from "./utils";
 const graph_configs = {
   score_graph: {
     layout: {
-      title: "Score over Time",
+      title: "Баллы по времени",
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
       hovermode: "closest",
@@ -66,7 +66,7 @@ const graph_configs = {
 
   category_breakdown: {
     layout: {
-      title: "Category Breakdown",
+      title: "По категориям",
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
       legend: {
@@ -114,7 +114,7 @@ const graph_configs = {
 
   solve_percentages: {
     layout: {
-      title: "Solve Percentages",
+      title: "Процент решённых",
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
       legend: {
@@ -133,7 +133,7 @@ const graph_configs = {
       return [
         {
           values: [solves_count, fails_count],
-          labels: ["Solves", "Fails"],
+          labels: ["Правильно", "Неправильно"],
           marker: {
             colors: ["rgb(0, 209, 64)", "rgb(207, 38, 0)"]
           },

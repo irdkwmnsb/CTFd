@@ -27,4 +27,4 @@ class UserPropertyCounts(Resource):
             )
             return {"success": True, "data": dict(data)}
         else:
-            return {"success": False, "message": "That could not be found"}, 404
+            return {"success": False, "message": "Не найдено"}, 404

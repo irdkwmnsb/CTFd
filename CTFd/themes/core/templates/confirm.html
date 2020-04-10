@@ -6,7 +6,7 @@
 {% block content %}
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Confirm</h1>
+			<h1>Подтверждение</h1>
 		</div>
 	</div>
 	<div class="container">
@@ -30,13 +30,13 @@
 				{% endfor %}
 				{% if user %}
 				<h3 class="text-center">
-					We've sent a confirmation email to {{ user.email }}
+					Мы отправили письмо с подтверждением на {{ user.email }}
 				</h3>
 
 				<br>
 
 				<h4 class="text-center">
-					Please click the link in that email to confirm your account.
+					Пожалуйста, перейдите по ссылке в письме чтобы активировать ваш аккаунт.
 				</h4>
 				{% endif %}
 
@@ -45,10 +45,10 @@
 				{% if name %}
 				<form method="POST" action="{{ url_for('auth.confirm') }}">
 					<h4 class="text-center">
-						Need to resend the confirmation email?
+                        Не получили письмо?
 					</h4>
 					<div class="col-md-12 text-center">
-						<button type="submit" tabindex="0" class="btn btn-md btn-primary btn-outlined">Resend</button>
+						<button type="submit" tabindex="0" class="btn btn-md btn-primary btn-outlined">Отправить ещё раз</button>
 					</div>
 					<input type="hidden" name="nonce" value="{{ nonce }}">
 				</form>

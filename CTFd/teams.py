@@ -50,10 +50,9 @@ def join():
     if request.method == "GET":
         team_size_limit = get_config("team_size", default=0)
         if team_size_limit:
-            plural = "" if team_size_limit == 1 else "s"
             infos.append(
-                "Teams are limited to {limit} member{plural}".format(
-                    limit=team_size_limit, plural=plural
+                "Максимальный размер команды = {limit}".format(
+                    limit=team_size_limit
                 )
             )
         return render_template("teams/join_team.html", infos=infos, errors=errors)
@@ -69,7 +68,7 @@ def join():
             team_size_limit = get_config("team_size", default=0)
             if team_size_limit and len(team.members) >= team_size_limit:
                 errors.append(
-                    "{name} has already reached the team size limit of {limit}".format(
+                    "Размер {name} уже {limit}".format(
                         name=team.name, limit=team_size_limit
                     )
                 )
@@ -86,7 +85,7 @@ def join():
 
             return redirect(url_for("challenges.listing"))
         else:
-            errors.append("That information is incorrect")
+            errors.append("Приведённая информация неверна")
             return render_template("teams/join_team.html", infos=infos, errors=errors)
 
 
@@ -99,10 +98,9 @@ def new():
     if request.method == "GET":
         team_size_limit = get_config("team_size", default=0)
         if team_size_limit:
-            plural = "" if team_size_limit == 1 else "s"
             infos.append(
-                "Teams are limited to {limit} member{plural}".format(
-                    limit=team_size_limit, plural=plural
+                "Максимальный размер команды = {limit}".format(
+                    limit=team_size_limit
                 )
             )
 
@@ -116,9 +114,9 @@ def new():
 
         existing_team = Teams.query.filter_by(name=teamname).first()
         if existing_team:
-            errors.append("That team name is already taken")
+            errors.append("Такая команда уже играет")
         if not teamname:
-            errors.append("That team name is invalid")
+            errors.append("Укажите название")
 
         if errors:
             return render_template("teams/new_team.html", errors=errors)

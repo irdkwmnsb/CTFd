@@ -25,11 +25,11 @@ def listing():
     end = get_config("end") or 0
 
     if ctf_paused():
-        infos.append("{} is paused".format(config.ctf_name()))
+        infos.append("{} приостановлен".format(config.ctf_name()))
 
     # CTF has ended but we want to allow view_after_ctf. Show error but let JS load challenges.
     if ctf_ended() and view_after_ctf():
-        infos.append("{} has ended".format(config.ctf_name()))
+        infos.append("{} закончился".format(config.ctf_name()))
 
     return render_template(
         "challenges.html", infos=infos, errors=errors, start=int(start), end=int(end)

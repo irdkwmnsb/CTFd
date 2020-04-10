@@ -6,7 +6,7 @@
 {% block content %}
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Users</h1>
+			<h1>Пользователи</h1>
 		</div>
 	</div>
 	<div class="container">
@@ -15,10 +15,10 @@
 				<table class="table table-striped">
 					<thead>
 					<tr>
-						<td><b>User</b></td>
-						<td><b>Website</b></td>
-						<td class="d-none d-md-table-cell d-lg-table-cell"><b>Affiliation</b></td>
-						<td class="d-none d-md-table-cell d-lg-table-cell"><b>Country</b></td>
+						<td><b>Имя пользователя</b></td>
+						<td><b>Вебсайт</b></td>
+						<td class="d-none d-md-table-cell d-lg-table-cell"><b>Организация</b></td>
+						<td class="d-none d-md-table-cell d-lg-table-cell"><b>Страна</b></td>
 					</tr>
 					</thead>
 					<tbody>
@@ -76,7 +76,7 @@
 		{% if pages > 1 %}
 			<div class="row">
 				<div class="col-md-12">
-					<div class="text-center">Page
+					<div class="text-center">Страница
 						<br>
 						{% if curr_page != 1 %}
 							<a href="{{ url_for('users.listing', page=curr_page - 1) }}">

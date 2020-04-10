@@ -39,11 +39,11 @@ def confirm(data=None):
             user_email = unserialize(data, max_age=1800)
         except (BadTimeSignature, SignatureExpired):
             return render_template(
-                "confirm.html", errors=["Your confirmation link has expired"]
+                "confirm.html", errors=["Ссылка была просрочена"]
             )
         except (BadSignature, TypeError, base64.binascii.Error):
             return render_template(
-                "confirm.html", errors=["Your confirmation token is invalid"]
+                "confirm.html", errors=["Ссылка недействительна"]
             )
 
         user = Users.query.filter_by(email=user_email).first_or_404()
@@ -82,7 +82,7 @@ def confirm(data=None):
             return render_template(
                 "confirm.html",
                 user=user,
-                infos=["Your confirmation email has been resent!"],
+                infos=["Письмо с подтверждением было выслано!"],
             )
         elif request.method == "GET":
             # User has been directed to the confirm page
@@ -98,11 +98,11 @@ def reset_password(data=None):
             email_address = unserialize(data, max_age=1800)
         except (BadTimeSignature, SignatureExpired):
             return render_template(
-                "reset_password.html", errors=["Your link has expired"]
+                "reset_password.html", errors=["Ссылка была просрочена"]
             )
         except (BadSignature, TypeError, base64.binascii.Error):
             return render_template(
-                "reset_password.html", errors=["Your reset token is invalid"]
+                "reset_password.html", errors=["Ссылка недействительна"]
             )
 
         if request.method == "GET":
@@ -114,14 +114,14 @@ def reset_password(data=None):
                 return render_template(
                     "reset_password.html",
                     errors=[
-                        "Your account was registered via an authentication provider and does not have an associated password. Please login via your authentication provider."
+                        "У данной учетной записи нет пароля. Войдите с помощью используемого сервиса."
                     ],
                 )
 
             pass_short = len(password) == 0
             if pass_short:
                 return render_template(
-                    "reset_password.html", errors=["Please pick a longer password"]
+                    "reset_password.html", errors=["Пароль слишком короткий"]
                 )
 
             user.password = password
@@ -144,14 +144,14 @@ def reset_password(data=None):
         if config.can_send_mail() is False:
             return render_template(
                 "reset_password.html",
-                errors=["Email could not be sent due to server misconfiguration"],
+                errors=["Ошибка в настройке сервера. Письмо не было отправленно. Обратитесь к организаторам."],
             )
 
         if not user:
             return render_template(
                 "reset_password.html",
                 errors=[
-                    "If that account exists you will receive an email, please check your inbox"
+                    "Если данный аккаунт существует, вы получите письмо. Проверьте вашу почту, включая папку спам."
                 ],
             )
 
@@ -159,7 +159,7 @@ def reset_password(data=None):
             return render_template(
                 "reset_password.html",
                 errors=[
-                    "The email address associated with this account was registered via an authentication provider and does not have an associated password. Please login via your authentication provider."
+                    "У данной учетной записи нет пароля. Войдите с помощью используемого сервиса."
                 ],
             )
 
@@ -168,7 +168,7 @@ def reset_password(data=None):
         return render_template(
             "reset_password.html",
             errors=[
-                "If that account exists you will receive an email, please check your inbox"
+                "Если данный аккаунт существует, вы получите письмо. Проверьте вашу почту, включая папку спам."
             ],
         )
     return render_template("reset_password.html")
@@ -197,25 +197,25 @@ def register():
         team_name_email_check = validators.validate_email(name)
 
         if not valid_email:
-            errors.append("Please enter a valid email address")
+            errors.append("Пожалуйста, укажите действительный адрес")
         if email.check_email_is_whitelisted(email_address) is False:
             errors.append(
-                "Only email addresses under {domains} may register".format(
+                "Только почты домена {domains} могут регистрироваться".format(
                     domains=get_config("domain_whitelist")
                 )
             )
         if names:
-            errors.append("That user name is already taken")
+            errors.append("Это имя пользователя уже занято")
         if team_name_email_check is True:
-            errors.append("Your user name cannot be an email address")
+            errors.append("Имя пользователя не может быть адресом электронной почты")
         if emails:
-            errors.append("That email has already been used")
+            errors.append("Этот адрес уже используется")
         if pass_short:
-            errors.append("Pick a longer password")
+            errors.append("Слишком короткий пароль")
         if pass_long:
-            errors.append("Pick a shorter password")
+            errors.append("Слишком длинный пароль")
         if name_len:
-            errors.append("Pick a longer user name")
+            errors.append("Слишком короткое имя пользователя")
 
         if len(errors) > 0:
             return render_template(
@@ -291,13 +291,13 @@ def login():
             else:
                 # This user exists but the password is wrong
                 log("logins", "[{date}] {ip} - submitted invalid password for {name}")
-                errors.append("Your username or password is incorrect")
+                errors.append("Неверные пароль или имя пользователя")
                 db.session.close()
                 return render_template("login.html", errors=errors)
         else:
             # This user just doesn't exist
             log("logins", "[{date}] {ip} - submitted invalid account information")
-            errors.append("Your username or password is incorrect")
+            errors.append("Неверные пароль или имя пользователя")
             db.session.close()
             return render_template("login.html", errors=errors)
     else:

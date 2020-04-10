@@ -12,7 +12,7 @@ const config = {
   responsive: true
 };
 const layout = {
-  title: "Top 10 " + (window.userMode === "teams" ? "Teams" : "Users"),
+  title: "Топ 10 " + (window.userMode === "teams" ? "Команд" : "Пользователей"),
   paper_bgcolor: "rgba(0,0,0,0)",
   plot_bgcolor: "rgba(0,0,0,0)",
   hovermode: "closest",
@@ -65,7 +65,7 @@ const createGraph = () => {
     if (teams.length === 0) {
       // Replace spinner
       graph.html(
-        '<div class="text-center"><h3 class="spinner-error">No solves yet</h3></div>'
+        '<div class="text-center"><h3 class="spinner-error">Пока нет решений</h3></div>'
       );
       return;
     }

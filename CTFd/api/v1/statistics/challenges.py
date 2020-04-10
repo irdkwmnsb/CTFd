@@ -21,7 +21,7 @@ class ChallengePropertyCounts(Resource):
             )
             return {"success": True, "data": dict(data)}
         else:
-            response = {"message": "That could not be found"}, 404
+            response = {"message": "Не найдено"}, 404
             return response
 
 

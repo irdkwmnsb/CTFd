@@ -134,7 +134,7 @@ class TeamPrivate(Resource):
             return (
                 {
                     "success": False,
-                    "errors": {"": ["Only team captains can edit team information"]},
+                    "errors": {"": ["Только капитаны могут редактировать эту информацию"]},
                 },
                 403,
             )

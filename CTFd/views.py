@@ -106,19 +106,19 @@ def setup():
             team_name_email_check = validators.validate_email(name)
 
             if not valid_email:
-                errors.append("Please enter a valid email address")
+                errors.append("Пожалуйста, укажите действительный адрес электронной почты")
             if names:
-                errors.append("That user name is already taken")
+                errors.append("Пользователь с таким именем уже зарегистрирован")
             if team_name_email_check is True:
-                errors.append("Your user name cannot be an email address")
+                errors.append("Имя пользователя не может быть адресом почты")
             if emails:
-                errors.append("That email has already been used")
+                errors.append("Пользователь с такой почтой уже зарегистрирован")
             if pass_short:
-                errors.append("Pick a longer password")
+                errors.append("Слишком короткий пароль")
             if pass_long:
-                errors.append("Pick a shorter password")
+                errors.append("Слишком длинный пароль")
             if name_len:
-                errors.append("Pick a longer user name")
+                errors.append("Слишком короткое имя пользователя")
 
             if len(errors) > 0:
                 return render_template(
@@ -197,13 +197,13 @@ def setup():
 
             set_config(
                 "password_change_alert_subject",
-                "Password Change Confirmation for {ctf_name}",
+                "Подтверждение смены пароля {ctf_name}",
             )
             set_config(
                 "password_change_alert_body",
                 (
-                    "Your password for {ctf_name} has been changed.\n\n"
-                    "If you didn't request a password change you can reset your password here: {url}"
+                    "Ваш пароль для {ctf_name} был изменён.\n\n"
+                    "Если вы этого не делали, поменяйте его здесь: {url}"
                 ),
             )
 

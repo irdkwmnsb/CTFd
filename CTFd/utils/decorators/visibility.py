@@ -24,7 +24,7 @@ def check_score_visibility(f):
 
         elif v == "hidden":
             return (
-                render_template("errors/403.html", error="Scores are currently hidden"),
+                render_template("errors/403.html", error="Очки сейчас недоступны"),
                 403,
             )
 

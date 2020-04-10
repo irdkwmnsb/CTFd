@@ -26,10 +26,10 @@ def during_ctf_time_only(f):
                 if view_after_ctf():
                     return f(*args, **kwargs)
                 else:
-                    error = "{} has ended".format(config.ctf_name())
+                    error = "{} закончился".format(config.ctf_name())
                     abort(403, description=error)
             if ctf_started() is False:
-                error = "{} has not started yet".format(config.ctf_name())
+                error = "{} ещё не начался".format(config.ctf_name())
                 abort(403, description=error)
 
     return during_ctf_time_only_wrapper
@@ -147,8 +147,7 @@ def ratelimit(method="POST", limit=50, interval=300, key_prefix="rl"):
                     resp = jsonify(
                         {
                             "code": 429,
-                            "message": "Too many requests. Limit is %s requests in %s seconds"
-                            % (limit, interval),
+                            "message": "Слишком много запросов",
                         }
                     )
                     resp.status_code = 429

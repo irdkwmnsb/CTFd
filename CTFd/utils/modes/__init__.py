@@ -29,12 +29,15 @@ def get_model():
 
 def get_mode_as_word(plural=False, capitalize=False):
     if get_config("user_mode") == USERS_MODE:
-        word = "user"
+        if plural:
+            word = "Пользователи"
+        else:
+            word = "Пользователь"
     else:
-        word = "team"
-
-    if plural:
-        word += "s"
+        if plural:
+            word = "Команда"
+        else:
+            word = "Команды"
     if capitalize:
         word = word.title()
     return word

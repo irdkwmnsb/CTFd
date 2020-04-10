@@ -21,14 +21,14 @@ class TeamSchema(ma.ModelSchema):
         required=True,
         allow_none=False,
         validate=[
-            validate.Length(min=1, max=128, error="Team names must not be empty")
+            validate.Length(min=1, max=128, error="Название команды не может быть пустым")
         ],
     )
     email = field_for(
         Teams,
         "email",
         allow_none=False,
-        validate=validate.Email("Emails must be a properly formatted email address"),
+        validate=validate.Email("Почта должна быть почтой"),
     )
     website = field_for(
         Teams,
@@ -36,7 +36,7 @@ class TeamSchema(ma.ModelSchema):
         validate=[
             # This is a dirty hack to let website accept empty strings so you can remove your website
             lambda website: validate.URL(
-                error="Websites must be a proper URL starting with http or https",
+                error="Вебсайт должен быть http или https ссылкой",
                 schemes={"http", "https"},
             )(website)
             if website
@@ -60,7 +60,7 @@ class TeamSchema(ma.ModelSchema):
             if team_id:
                 if existing_team and existing_team.id != team_id:
                     raise ValidationError(
-                        "Team name has already been taken", field_names=["name"]
+                        "Это название уже занято", field_names=["name"]
                     )
             else:
                 # If there's no Team ID it means that the admin is creating a team with no ID.
@@ -68,11 +68,11 @@ class TeamSchema(ma.ModelSchema):
                     if current_team:
                         if current_team.id != existing_team.id:
                             raise ValidationError(
-                                "Team name has already been taken", field_names=["name"]
+                                "Это название уже занято", field_names=["name"]
                             )
                     else:
                         raise ValidationError(
-                            "Team name has already been taken", field_names=["name"]
+                            "Это название уже занято", field_names=["name"]
                         )
         else:
             # We need to allow teams to edit themselves and allow the "conflict"
@@ -82,12 +82,12 @@ class TeamSchema(ma.ModelSchema):
                 name_changes = get_config("name_changes", default=True)
                 if bool(name_changes) is False:
                     raise ValidationError(
-                        "Name changes are disabled", field_names=["name"]
+                        "Название менять нельзя.", field_names=["name"]
                     )
 
                 if existing_team:
                     raise ValidationError(
-                        "Team name has already been taken", field_names=["name"]
+                        "Это название уже занято", field_names=["name"]
                     )
 
     @pre_load
@@ -102,12 +102,12 @@ class TeamSchema(ma.ModelSchema):
             if team_id:
                 if existing_team and existing_team.id != team_id:
                     raise ValidationError(
-                        "Email address has already been used", field_names=["email"]
+                        "Эта почта уже занята", field_names=["email"]
                     )
             else:
                 if existing_team:
                     raise ValidationError(
-                        "Email address has already been used", field_names=["email"]
+                        "Эта почта уже занята", field_names=["email"]
                     )
         else:
             current_team = get_current_team()
@@ -116,7 +116,7 @@ class TeamSchema(ma.ModelSchema):
             else:
                 if existing_team:
                     raise ValidationError(
-                        "Email address has already been used", field_names=["email"]
+                        "Эта почта уже занята", field_names=["email"]
                     )
 
     @pre_load
@@ -132,13 +132,13 @@ class TeamSchema(ma.ModelSchema):
 
             if current_team.captain_id != current_user.id:
                 raise ValidationError(
-                    "Only the captain can change the team password",
+                    "Только капитан может менять пароль",
                     field_names=["captain_id"],
                 )
 
             if password and (bool(confirm) is False):
                 raise ValidationError(
-                    "Please confirm your current password", field_names=["confirm"]
+                    "Пожалуйста, введите текущий пароль", field_names=["confirm"]
                 )
 
             if password and confirm:
@@ -149,7 +149,7 @@ class TeamSchema(ma.ModelSchema):
                     return data
                 else:
                     raise ValidationError(
-                        "Your previous password is incorrect", field_names=["confirm"]
+                        "Прошлый пароль неверен", field_names=["confirm"]
                     )
             else:
                 data.pop("password", None)
@@ -179,7 +179,7 @@ class TeamSchema(ma.ModelSchema):
                 return
             else:
                 raise ValidationError(
-                    "Only the captain can change team captain",
+                    "Только капитан может поменять капитана",
                     field_names=["captain_id"],
                 )
 

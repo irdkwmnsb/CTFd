@@ -6,7 +6,7 @@
 {% block content %}
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Create Team</h1>
+			<h1>Создать команду</h1>
 		</div>
 	</div>
 	<div class="container">
@@ -22,7 +22,7 @@
 				{% endfor %}
 				{% for error in errors %}
 					<div class="alert alert-danger alert-dismissable" role="alert">
-						<span class="sr-only">Error:</span>
+						<span class="sr-only">Ошибка:</span>
 						{{ error }}
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
 								aria-hidden="true">×</span></button>
@@ -30,19 +30,19 @@
 				{% endfor %}
 				<form method="POST">
 					<div class="form-group">
-						<label>Team Name:</label>
+						<label>Название:</label>
 						<input class="form-control" type="text" name="name">
 					</div>
 					<div class="form-group">
-						<label>Team Password:</label>
+						<label>Пароль:</label>
 						<input class="form-control" type="password" name="password">
 					</div>
 					<input type="hidden" name="nonce" value="{{ nonce }}">
 					<div class="row pt-3">
 						<div class="col-md-12">
-							<p>After creating your team, share the team name and password with your teammates so they can join your team.</p>
+							<p>Поделитесь этими данными с вашими сокомандниками, чтобы они смолги войти.</p>
 							<button type="submit" class="btn btn-success float-right">
-								Create
+								Создать
 							</button>
 						</div>
 					</div>

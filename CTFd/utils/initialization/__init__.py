@@ -189,7 +189,7 @@ def init_request_processors(app):
                         return (
                             render_template(
                                 "errors/403.html",
-                                error="You have been banned from this CTF",
+                                error="Вы были забанены на этом соревновании",
                             ),
                             403,
                         )
@@ -198,7 +198,7 @@ def init_request_processors(app):
                         return (
                             render_template(
                                 "errors/403.html",
-                                error="Your team has been banned from this CTF",
+                                error="Ваша команда была забанена на этом соревновании",
                             ),
                             403,
                         )

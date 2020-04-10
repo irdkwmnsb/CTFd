@@ -12,9 +12,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 offset-md-3 text-center">
-				<p>Welcome to {{ get_ctf_name() }}!</p>
+				<p>Добро пожаловать на {{ get_ctf_name() }}!</p>
 				<p>
-					In order to participate you must either join or create a team.
+					Чтобы принять участие вы должны быть в команде.
 				</p>
 			</div>
 		</div>
@@ -35,10 +35,10 @@
 		{% else %}
 		<div class="row pt-3">
 			<div class="col-md-3 offset-md-3 text-center">
-				<a class="btn btn-primary w-100" href="{{ url_for('teams.join') }}">Join Team</a>
+				<a class="btn btn-primary w-100" href="{{ url_for('teams.join') }}">Присоединиться к команде</a>
 			</div>
 			<div class="col-md-3 text-center">
-				<a class="btn btn-primary w-100" href="{{ url_for('teams.new') }}">Create Team</a>
+				<a class="btn btn-primary w-100" href="{{ url_for('teams.new') }}">Создать команду</a>
 			</div>
 		</div>
 		{% endif %}

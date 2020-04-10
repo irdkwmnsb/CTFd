@@ -6,42 +6,42 @@ from CTFd.utils.email import mailgun, smtp
 from CTFd.utils.formatters import safe_format
 from CTFd.utils.security.signing import serialize
 
-DEFAULT_VERIFICATION_EMAIL_SUBJECT = "Confirm your account for {ctf_name}"
+DEFAULT_VERIFICATION_EMAIL_SUBJECT = "Подтвердите ваш аккаунт на {ctf_name}"
 DEFAULT_VERIFICATION_EMAIL_BODY = (
-    "Please click the following link to confirm your email "
-    "address for {ctf_name}: {url}"
+    "Пожалуйста, перейдите по ссылке чтобы подтвердить ваш "
+    "адрес электронной почты на {ctf_name}: {url}"
 )
-DEFAULT_SUCCESSFUL_REGISTRATION_EMAIL_SUBJECT = "Successfully registered for {ctf_name}"
+DEFAULT_SUCCESSFUL_REGISTRATION_EMAIL_SUBJECT = "Успешная регистрация на {ctf_name}"
 DEFAULT_SUCCESSFUL_REGISTRATION_EMAIL_BODY = (
-    "You've successfully registered for {ctf_name}!"
+    "Вы успешно зарегистрировались на {ctf_name}!"
 )
-DEFAULT_USER_CREATION_EMAIL_SUBJECT = "Message from {ctf_name}"
+DEFAULT_USER_CREATION_EMAIL_SUBJECT = "Сообщение от {ctf_name}"
 DEFAULT_USER_CREATION_EMAIL_BODY = (
-    "An account has been created for you for {ctf_name} at {url}. \n\n"
-    "Username: {name}\n"
-    "Password: {password}"
+    "Для вас был создан аккаунт на {ctf_name} в {url}. \n\n"
+    "Имя пользователя: {name}\n"
+    "Ваш пароль: {password}"
 )
-DEFAULT_PASSWORD_RESET_SUBJECT = "Password Reset Request from {ctf_name}"
+DEFAULT_PASSWORD_RESET_SUBJECT = "Смена пароля на {ctf_name}"
 DEFAULT_PASSWORD_RESET_BODY = (
-    "Did you initiate a password reset? "
-    "If you didn't initiate this request you can ignore this email. \n\n"
-    "Click the following link to reset your password:\n{url}"
+    "Вы просили сбросить ваш пароль? "
+    "Если нет, проигнорируйте это сообщение. \n\n"
+    "Перейдите по следующей ссылке чтобы сбросить ваш пароль:\n{url}"
 )
-DEFAULT_PASSWORD_CHANGE_ALERT_SUBJECT = "Password Change Confirmation for {ctf_name}"
+DEFAULT_PASSWORD_CHANGE_ALERT_SUBJECT = "Подтверждение смены пароля {ctf_name}"
 DEFAULT_PASSWORD_CHANGE_ALERT_BODY = (
-    "Your password for {ctf_name} has been changed.\n\n"
-    "If you didn't request a password change you can reset your password here: {url}"
+    "Пароль для {ctf_name} был изменён.\n\n"
+    "Если вы не меняли пароль сбросьте его здесь: {url}"
 )
 
 
-def sendmail(addr, text, subject="Message from {ctf_name}"):
+def sendmail(addr, text, subject="Сообщение от {ctf_name}"):
     subject = safe_format(subject, ctf_name=get_config("ctf_name"))
     provider = get_mail_provider()
     if provider == "smtp":
         return smtp.sendmail(addr, text, subject)
     if provider == "mailgun":
         return mailgun.sendmail(addr, text, subject)
-    return False, "No mail settings configured"
+    return False, "Настройки почты не заданы"
 
 
 def password_change_alert(email):

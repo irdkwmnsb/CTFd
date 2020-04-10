@@ -6,13 +6,13 @@
 			</button>
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
-					<a class="nav-link active" href="#challenge">Challenge</a>
+					<a class="nav-link active" href="#challenge">Задание</a>
 				</li>
 				{% if solves == None %}
 				{% else %}
 					<li class="nav-item">
 						<a class="nav-link challenge-solves" href="#solves">
-							{{ solves }} {% if solves > 1 %}Solves{% else %}Solves{% endif %}
+							{{ solves }} {% if solves > 1 %}Решений{% else %}Решение{% endif %}
 						</a>
 					</li>
 				{% endif %}
@@ -34,16 +34,16 @@
 									<a class="btn btn-info btn-hint btn-block load-hint" href="javascript:;" data-hint-id="{{ hint.id }}">
 										{% if hint.content %}
 											<small>
-												View Hint
+                                                Посмотреть подсказку
 											</small>
 										{% else %}
 											{% if hint.cost %}
 												<small>
-													Unlock Hint for {{ hint.cost }} points
+                                                    Разблокировать подсказку за {{ hint.cost }} очков
 												</small>
 											{% else %}
 												<small>
-													View Hint
+                                                    Посмотреть подсказку
 												</small>
 											{% endif %}
 										{% endif %}
@@ -79,7 +79,7 @@
 							</div>
 							<div class="col-md-3 form-group key-submit">
 								<button type="submit" id="submit-key" tabindex="0"
-										class="btn btn-md btn-outline-secondary float-right">Submit
+										class="btn btn-md btn-outline-secondary float-right">Отправить
 								</button>
 							</div>
 						</div>
@@ -98,9 +98,9 @@
 								<table class="table table-striped text-center">
 									<thead>
 									<tr>
-										<td><b>Name</b>
+										<td><b>Название</b>
 										</td>
-										<td><b>Date</b>
+										<td><b>Когда</b>
 										</td>
 									</tr>
 									</thead>

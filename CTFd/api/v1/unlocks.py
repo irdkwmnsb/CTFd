@@ -47,7 +47,7 @@ class UnlockList(Resource):
                 {
                     "success": False,
                     "errors": {
-                        "score": "You do not have enough points to unlock this hint"
+                        "score": "У вас не хватает очков, чтобы открыть эту подсказку"
                     },
                 },
                 400,
